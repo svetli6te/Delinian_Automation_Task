@@ -5,7 +5,7 @@ test.describe('Tests are starting from the Home Page', () => {
 
     test.beforeEach(async ({ page }) => {
         await page.goto('https://coinmarketcap.com/');
-        //Browser window resizing does't work with "npx playwright test --ui"
+        //Uncoment next line if you run tests one by one and prefer to be in bigger window size than the default one 
         //page.setViewportSize({ width: 1920, height: 1080 });
     })
 
@@ -13,7 +13,6 @@ test.describe('Tests are starting from the Home Page', () => {
         await page.getByText('Search', { exact: true }).click();
         await page.getByPlaceholder('Search coin, pair, contract address, exchange, or post').fill('bitcoin');
         await page.getByPlaceholder('Search coin, pair, contract address, exchange, or post').press('Enter');
-
         await expect(page).toHaveURL('https://coinmarketcap.com/currencies/bitcoin/');
     })
 
@@ -25,11 +24,14 @@ test.describe('Tests are starting from the Home Page', () => {
     })
 
     test('Pagenation- Validate that users can navigate through multiple pages of results', async ({ page }) => {
+        await page.getByRole('button', { name: 'Page 2' }).click();
         await page.goto('https://coinmarketcap.com/?page=2');
         await expect(page).toHaveURL('https://coinmarketcap.com/?page=2');
+        await page.getByRole('button', { name: 'Page 3' }).click();
         await page.goto('https://coinmarketcap.com/?page=3');
         await expect(page).toHaveURL('https://coinmarketcap.com/?page=3');
     })
+    
     test('Sorting Functionality - Verify that the sorting options (price) work as expected', async ({ page }) => {
         await page.getByText('Price', { exact: true }).click();
         await expect(page.getByRole('cell', { name: 'H Price' }).locator('span').nth(1)).toBeVisible;

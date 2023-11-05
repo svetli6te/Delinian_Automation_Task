@@ -5,6 +5,7 @@ test.describe('Tests are starting from the CryptoCurency Page', () => {
 
     test.beforeEach(async ({ page }) => {
         await page.goto('https://coinmarketcap.com/currencies/bitcoin/');
+        //Uncoment next line if you run tests one by one and prefer to be in bigger window size than the default one 
         //page.setViewportSize({ width: 1920, height: 1080 });
     })
 
