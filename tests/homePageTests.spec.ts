@@ -25,13 +25,11 @@ test.describe('Tests are starting from the Home Page', () => {
 
     test('Pagenation- Validate that users can navigate through multiple pages of results', async ({ page }) => {
         await page.getByRole('button', { name: 'Page 2' }).click();
-        await page.goto('https://coinmarketcap.com/?page=2');
         await expect(page).toHaveURL('https://coinmarketcap.com/?page=2');
         await page.getByRole('button', { name: 'Page 3' }).click();
-        await page.goto('https://coinmarketcap.com/?page=3');
         await expect(page).toHaveURL('https://coinmarketcap.com/?page=3');
     })
-    
+
     test('Sorting Functionality - Verify that the sorting options (price) work as expected', async ({ page }) => {
         await page.getByText('Price', { exact: true }).click();
         await expect(page.getByRole('cell', { name: 'H Price' }).locator('span').nth(1)).toBeVisible;
