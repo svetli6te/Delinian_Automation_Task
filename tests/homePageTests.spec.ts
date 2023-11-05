@@ -5,7 +5,7 @@ test.describe('Tests are starting from the Home Page', () => {
 
     test.beforeEach(async ({ page }) => {
         await page.goto('https://coinmarketcap.com/');
-        //Uncoment next line if you run tests one by one and prefer to be in bigger window size than the default one 
+        //Uncomment next line if you want to run the tests one by one with resolution 1920:1080
         //page.setViewportSize({ width: 1920, height: 1080 });
     })
 
